@@ -1,54 +1,35 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import AuthForm from "../components/AuthForm";
+import { login } from "../api/auth";
+import { Link } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../context/UserContext";
 
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
-  const navigate = useNavigate();
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/home");
-  };
-
-  const moveToSignUp = (e) => {
-    navigate("/signup");
+  const { setUser } = useContext(UserContext);
+  const handleLogin = async (formData) => {
+    try {
+      const { id, password } = formData;
+      const data = await login(id, password);
+      if (data.success) {
+        setUser(data);
+        Navigate("/");
+      }
+    } catch (error) {
+      alert("로그인에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Login</h1>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
-        >
-          Login
-        </button>
-        <button
-          type="Button"
-          className="w-full bg-blue-500 text-white p-2 rounded"
-          onClick={moveToSignUp}
-        >
-          회원가입
-        </button>
-      </form>
+    <div>
+      <div>
+        <h1>로그인</h1>
+        <AuthForm mode="login" onSubmit={handleLogin} />
+        <div>
+          <p>
+            계정이 없으신가요? <Link to="/signup">회원가입</Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
