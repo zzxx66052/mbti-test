@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 const Signup = () => {
   const navigate = useNavigate();
 
-  // 완성된 로직들이 아니에요! 참고만 하세요!
   const handleSignup = async (formData) => {
     try {
       const data = await register(formData);
@@ -19,13 +18,18 @@ const Signup = () => {
   };
 
   return (
-    <div>
-      <div>
-        <h1>회원가입</h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          회원가입
+        </h1>
         <AuthForm mode="signup" onSubmit={handleSignup} />
-        <div>
-          <p>
-            이미 계정이 있으신가요? <Link to="/login">로그인</Link>
+        <div className="mt-4 text-center">
+          <p className="text-gray-600">
+            이미 계정이 있으신가요?{" "}
+            <Link to="/login" className="text-blue-500 hover:underline">
+              로그인
+            </Link>
           </p>
         </div>
       </div>

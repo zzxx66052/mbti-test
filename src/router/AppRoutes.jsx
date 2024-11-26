@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { UserProvider } from "../context/UserContext";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import GlobalStyle from "../styles/GlobalStyle";
 import Layout from "../layout/Layout";
 import Home from "../page/Home";
 import Login from "../page/Login";
@@ -18,7 +17,6 @@ function AppRoutes() {
       <UserProvider>
         <BrowserRouter>
           <ToastContainer />
-          <GlobalStyle />
           <Routes>
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
