@@ -15,8 +15,7 @@ const Login = () => {
       const data = await login({ id, password });
 
       if (data.success) {
-        setUser(data.accessToken);
-        console.log(data.accessToken);
+        setUser(data.accessToken, data.userId);
         navigate("/");
       }
     } catch (error) {

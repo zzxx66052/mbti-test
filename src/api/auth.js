@@ -18,7 +18,11 @@ export const login = async (userData) => {
   const localData = response.data;
 
   if (localData.success) {
-    localStorage.setItem("user", JSON.stringify(localData.accessToken));
+    const userInfo = {
+      accessToken: localData.accessToken,
+      userId: localData.userId,
+    };
+    localStorage.setItem("user", JSON.stringify(userInfo));
   }
   1;
 
@@ -34,12 +38,11 @@ export const getUserProfile = async (formData, token) => {
   return response.data;
 };
 
-export const updateProfile = async (formData, token) => {
+export const updateProfile = async (formData, updateToken) => {
   const response = await axios.patch(`${API_URL}/profile`, formData, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${updateToken}`,
     },
   });
-
   return response.data;
 };

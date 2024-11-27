@@ -1,6 +1,7 @@
 import { Navigate, Outlet } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 const ProtectedRoute = () => {
   const { user } = useContext(UserContext);
