@@ -2,7 +2,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { mbtiDescriptions } from "../data/mbtiDescriptions";
 
-const API_URL = "https://obvious-foremost-midnight.glitch.me";
+const API_URL = "https://obvious-foremost-midnight.glitch.me/testResults";
 
 export const getTestResults = async () => {
   const response = await axios.get(API_URL);
