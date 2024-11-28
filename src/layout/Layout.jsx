@@ -47,7 +47,7 @@ const Layout = () => {
                   to="/list"
                   className="text-lg text-white hover:text-gray-300 transition duration-300"
                 >
-                  리스트페이지
+                  리스트
                 </Link>
                 <Link
                   to="/profile"

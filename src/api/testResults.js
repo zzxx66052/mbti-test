@@ -2,7 +2,7 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import { mbtiDescriptions } from "../data/mbtiDescriptions";
 
-const API_URL = "https://obvious-foremost-midnight.glitch.me/testResults";
+const API_URL = "https://decisive-pebble-mechanic.glitch.me";
 
 export const getTestResults = async () => {
   const response = await axios.get(API_URL);
@@ -17,7 +17,7 @@ export const createTestResult = async (resultData, userId) => {
       mbtiDescriptions[resultData] || "해당 성격 유형에 대한 설명이 없습니다.",
     userId,
     created_at: new Date().toISOString(),
-    visibility: false,
+    visibility: true,
   };
   const response = await axios.post(API_URL, newResult);
   return response.data;
