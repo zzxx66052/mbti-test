@@ -16,12 +16,12 @@ const Test = () => {
   /* Test 결과는 mbtiResult 라는 변수에 저장이 됩니다. 이 데이터를 어떻게 API 를 이용해 처리 할 지 고민해주세요. */
   /* 처리하신 후에는 MBTI 결과를 setResult 로 넣어주도록 합시다!*/
   const handleTestSubmit = async (answers) => {
-    // const unansweredIndex = answers.findIndex((answer) => !answer.answer);
-    // // if (unansweredIndex !== -1) {
-    // //   toast.error(`문항 ${unansweredIndex + 1}번이 체크되지 않았습니다!`);
-    // //   answeredRef.current?.focus({ behavior: "smooth" });
-    // //   return;
-    // // }
+    const unansweredIndex = answers.findIndex((answer) => !answer.answer);
+    if (unansweredIndex !== -1) {
+      toast.error(`문항 ${unansweredIndex + 1}번이 체크되지 않았습니다!`);
+      answeredRef.current?.focus({ behavior: "smooth" });
+      return;
+    }
 
     const mbtiResult = calculateMBTI(answers);
     const newUserId = user.userId;
