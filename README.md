@@ -4,7 +4,7 @@ MBTI 성격 유형 테스트를 제공하는 웹 애플리케이션입니다. �
 
 ## 📌 링크
 
-[MBTI Test - Live Demo](https://mbti-test-omega.vercel.app/test)
+[MBTI Test - Live Demo](https://mbti-test-red-kappa.vercel.app/)
 
 ## 🛠 주요 기능
 
