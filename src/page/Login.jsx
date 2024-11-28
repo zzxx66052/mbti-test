@@ -13,10 +13,10 @@ const Login = () => {
     try {
       const { id, password } = formData;
       const data = await login({ id, password });
-      // const infoData = { accessToken, userId };
+      const infoData = { accessToken: data.accessToken, userId: data.userId };
 
       if (data.success) {
-        setUser(data.accessToken, data.userId);
+        setUser(infoData);
         navigate("/");
       }
     } catch (error) {
