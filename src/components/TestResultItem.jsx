@@ -1,18 +1,10 @@
-import React from "react";
-import {
-  updateTestResultVisibility,
-  deleteTestResult,
-} from "../api/testResults";
-
-const TestResultItem = ({ result, isOwner, onUpdate }) => {
+const TestResultItem = ({ result, isOwner, onUpdateVisibility, onDelete }) => {
   const handleVisibilityToggle = async () => {
-    await updateTestResultVisibility(result.id, !result.visibility);
-    onUpdate();
+    onUpdateVisibility(result.id, result.visibility);
   };
 
-  const handleDelete = async () => {
-    await deleteTestResult(result.id);
-    onUpdate();
+  const handleDelete = () => {
+    onDelete(result.id);
   };
 
   return (

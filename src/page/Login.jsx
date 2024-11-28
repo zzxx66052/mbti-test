@@ -13,6 +13,7 @@ const Login = () => {
     try {
       const { id, password } = formData;
       const data = await login({ id, password });
+      // const infoData = { accessToken, userId };
 
       if (data.success) {
         setUser(data.accessToken, data.userId);

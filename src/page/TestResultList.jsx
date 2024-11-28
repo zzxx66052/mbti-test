@@ -21,14 +21,8 @@ const TestResultList = () => {
   }, []);
 
   const handleVisibilityUpdate = async (id, visibility) => {
-    try {
-      await updateTestResultVisibility(id, { visibility });
-      // 공개 여부 변경 후, 데이터 새로 고침
-      const updatedResults = await getTestResults();
-      setTestResults(updatedResults);
-    } catch (error) {
-      console.error("Failed to update visibility:", error);
-    }
+    await updateTestResultVisibility(id, visibility);
+    // 공개 여부 변경 후, 데이터 새로 고침
   };
 
   const handleDelete = async (id) => {
@@ -57,7 +51,7 @@ const TestResultList = () => {
               result={result}
               isOwner={result.userId === user.userId}
               onUpdateVisibility={handleVisibilityUpdate}
-              onUpdate={handleDelete}
+              onDelete={handleDelete}
             />
           ))}
       </ul>
