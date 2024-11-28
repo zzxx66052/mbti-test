@@ -1,54 +1,45 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import AuthForm from "../components/AuthForm";
+import { login } from "../api/auth";
+import { Link, useNavigate } from "react-router-dom";
+import { useUser } from "../context/UserContext";
+import { toast } from "react-toastify";
 
 const Login = () => {
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
   const navigate = useNavigate();
+  const { setUser } = useUser();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    navigate("/home");
-  };
+  // 로그인을 처리하는 함수
+  const handleLogin = async (formData) => {
+    try {
+      const { id, password } = formData;
+      const data = await login({ id, password });
+      // const infoData = { accessToken, userId };
 
-  const moveToSignUp = (e) => {
-    navigate("/signup");
+      if (data.success) {
+        setUser(data.accessToken, data.userId);
+        navigate("/");
+      }
+    } catch (error) {
+      toast.error("로그인에 실패했습니다. 다시 시도해주세요.");
+    }
   };
 
   return (
-    <div className="p-6">
-      <h1 className="text-2xl font-bold">Login</h1>
-      <form onSubmit={handleSubmit} className="mt-4">
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          className="w-full p-2 border border-gray-300 rounded mb-4"
-        />
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white p-2 rounded"
-        >
-          Login
-        </button>
-        <button
-          type="Button"
-          className="w-full bg-blue-500 text-white p-2 rounded"
-          onClick={moveToSignUp}
-        >
-          회원가입
-        </button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-full max-w-md p-8 bg-white rounded-lg shadow-lg">
+        <h1 className="text-2xl font-semibold text-center text-gray-800 mb-6">
+          로그인
+        </h1>
+        <AuthForm mode="login" onSubmit={handleLogin} />
+        <div className="mt-4 text-center">
+          <p className="text-gray-600">
+            계정이 없으신가요?{" "}
+            <Link to="/signup" className="text-blue-500 hover:underline">
+              회원가입
+            </Link>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };
